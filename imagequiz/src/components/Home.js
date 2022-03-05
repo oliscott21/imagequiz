@@ -40,40 +40,5 @@ const Home = () => {
   );
 }
 
-/*
-const placeFlowers = () => {
-  let displayFlowers = () => {
-         let div = document.querySelector('#flowersDiv');
-         for (let i = 0; i < 2; i++) {
-           let row = document.createElement('div');
-           row.setAttribute('class', 'row');
-           div.appendChild(row);
-           for (let j = 0; j < 4; j++) {
-             let col = document.createElement('div');
-             let flower = document.createElement('img');
-             let title = document.createElement('h5');
-             let index = i * 4 + j;
-
-             col.setAttribute('class', 'col');
-             col.style.paddingTop = '25px';
-             col.style.paddingLeft = '25px';
-             col.style.paddingRight = '25px';
-             col.style.width = '25%';
-             col.style.textAlign = 'center';
-             flower.style.width = '100%';
-             let width = screen.width/4;
-             flower.style.height = (width/1.5) + 'px';
-
-
-             flower.src = flowers[index].picture;
-             title.innerHTML = flowers[index].name;
-             col.appendChild(flower);
-             col.appendChild(title);
-             row.appendChild(col);
-           }
-         }
-       }
-}
-*/
 
 export default Home;
