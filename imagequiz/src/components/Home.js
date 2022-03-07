@@ -1,7 +1,6 @@
-import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import flowers from "./data.js";
-import local_stor from "../data_access_layer/local"
 
 const Home = () => {
   console.log(flowers);

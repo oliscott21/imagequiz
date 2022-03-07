@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import local_stor from "../data_access_layer/local"
@@ -26,7 +26,6 @@ const Register = () => {
 
   let onFNameChange = (e) => {
     setFName(e.target.value);
-
 
     if (!!err["fname"]) setErrors({["fname"]:null});
   }
