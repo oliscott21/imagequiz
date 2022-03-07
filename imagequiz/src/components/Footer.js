@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Footer = () => {
   return(
-    <Container className="App-footer fixed-bottom">
+    <Container className="App-footer">
       <Row>
         <Col>
           <h5>This is the Footer </h5>

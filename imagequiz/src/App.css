@@ -10,17 +10,16 @@
 
 .images {
   padding-top: 25px;
-  padding-bottom: 25px;
 }
+
 .imgCon {
   width: 25%;
-  height: 100px;
+  height: 25vh;
 }
 
 .img {
   width: 100%;
   height: 75%;
-  text-decoration: none;
 }
 
 .App-header {
@@ -35,29 +34,12 @@
   color: white;
 }
 
-.outer {
-  padding-top: 100px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.shape {
-  background: #282c34;
-  color: #fff;
-  height: 50%;
-  width: 60%;
-  position: absolute;
-  top: 50%;
-  border-radius: 25px;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%)
-}
 
 .form {
-  width: 75%;
+  width: 45%;
   margin-left: auto;
   margin-right: auto;
-  font-size: 15pt;
+  font-size: 10pt;
 }
 
 .error {

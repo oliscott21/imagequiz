@@ -36,32 +36,26 @@ const Login = (props) => {
   }
 
   return (
-    <Container className="outer d-flex justify-content-center">
-      <Row className="shape d-flex align-items-center">
-        <Col>
-          <Form onSubmit={onSubmitHandler} className="form">
+    <Form onSubmit={onSubmitHandler} className="form">
 
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" value={email} onChange={onEmailChange}
-            isInvalid={ err }/>
-          </Form.Group>
-          <Form.Group controlId="formPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" value={password} onChange={onPasswordChange}
-             isInvalid={ err }/>
+    <Form.Group controlId="formBasicEmail">
+      <Form.Label>Email address</Form.Label>
+      <Form.Control type="email" placeholder="Enter email" value={email} onChange={onEmailChange}
+      isInvalid={ err }/>
+    </Form.Group>
+    <Form.Group controlId="formPassword">
+      <Form.Label>Password</Form.Label>
+      <Form.Control type="password" placeholder="Password" value={password} onChange={onPasswordChange}
+       isInvalid={ err }/>
 
-             <Form.Control.Feedback type="invalid" className="error">
-               {err}
-             </Form.Control.Feedback>
-          </Form.Group>
-            <Button variant="primary" type="submit" className="btn">
-              Submit
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+       <Form.Control.Feedback type="invalid" className="error">
+         {err}
+       </Form.Control.Feedback>
+    </Form.Group>
+      <Button variant="primary" type="submit" className="btn">
+        Submit
+      </Button>
+    </Form>
   );
 }
 

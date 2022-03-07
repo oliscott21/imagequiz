@@ -60,55 +60,49 @@ const Register = () => {
   }
 
     return (
-    <Container className="outer d-flex justify-content-center">
-      <Row className="shape d-flex align-items-center">
-        <Col>
-          <Form onSubmit={onSubmitHandler} className="form">
-            <Row>
-              <Col>
-                <Form.Group className="mb-3" controlId="formFirstName">
-                  <Form.Label>First Name</Form.Label>
-                  <Form.Control type="text" placeholder="Enter first name" value={fname} onChange={onFNameChange}
-                    isInvalid={ !!err.fname}/>
-                  <Form.Control.Feedback type="invalid" className="error">
-                    {err.fname}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group controlId="formLastName">
-                  <Form.Label>Last Name</Form.Label>
-                  <Form.Control placeholder="Enter Last name" value={lname} onChange={onLNameChange}
-                  isInvalid={ !!err.lname}/>
-                <Form.Control.Feedback type="invalid" className="error">
-                  {err.lname}
-                </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" value={email} onChange={onEmailChange}
-              isInvalid={ !!err.email}/>
+      <Form onSubmit={onSubmitHandler} className="form">
+        <Row>
+          <Col>
+            <Form.Group className="mb-3" controlId="formFirstName">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter first name" value={fname} onChange={onFNameChange}
+                isInvalid={ !!err.fname}/>
+              <Form.Control.Feedback type="invalid" className="error">
+                {err.fname}
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="formLastName">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control placeholder="Enter Last name" value={lname} onChange={onLNameChange}
+              isInvalid={ !!err.lname}/>
             <Form.Control.Feedback type="invalid" className="error">
-              {err.email}
+              {err.lname}
             </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group controlId="formPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={onPasswordChange}
-              isInvalid={ !!err.pass}/>
-            <Form.Control.Feedback type="invalid" className="error">
-              {err.pass}
-            </Form.Control.Feedback>
-            </Form.Group>
-            <Button variant="primary" type="submit" className="btn">
-              Submit
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+          </Col>
+        </Row>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" value={email} onChange={onEmailChange}
+          isInvalid={ !!err.email}/>
+        <Form.Control.Feedback type="invalid" className="error">
+          {err.email}
+        </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group controlId="formPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" value={password} onChange={onPasswordChange}
+          isInvalid={ !!err.pass}/>
+        <Form.Control.Feedback type="invalid" className="error">
+          {err.pass}
+        </Form.Control.Feedback>
+        </Form.Group>
+        <Button variant="primary" type="submit" className="btn">
+          Submit
+        </Button>
+      </Form>
   );
 }
 
