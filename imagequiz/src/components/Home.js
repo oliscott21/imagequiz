@@ -3,8 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import flowers from "./data.js";
 
 const Home = () => {
-  console.log(flowers);
-
   const flower = []
   let inner = []
   for (var i = 0; i < flowers.length; i++) {
