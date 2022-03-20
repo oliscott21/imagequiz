@@ -13,13 +13,12 @@
 }
 
 .imgCon {
-  width: 25%;
-  height: 25vh;
+  height: 45vh;
 }
 
 .img {
   width: 100%;
-  height: 75%;
+  height: 80%;
 }
 
 .App-header {

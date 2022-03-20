@@ -1,39 +1,28 @@
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col, Image, Card } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import flowers from "./data.js";
+import local_stor from "../data_access_layer/local.js"
 
 const Home = () => {
-  const flower = []
-  let inner = []
-  for (var i = 0; i < flowers.length; i++) {
-    if (i % 4 === 0) {
-        flower.push(inner);
-        inner = []
-    }
-    inner.push(flowers[i]);
-  }
-  inner.push("")
-  flower.push(inner);
+
 
   return (
-
     <Container className="images">
-        {flower.map ((inn, i) => {
-          return (
-            <Row>
-              { inn.map ((image, j) => {
-                return (
-                  <Col className="imgCon" >
-                    <Image className="img" src={image.picture}/>
-                    <p>{image.name}</p>
-                  </Col>
-                );
-              })}
-            </Row>
-          );
-        })}
-
+      <Row xs={1} md={4} className="g-4">
+        {local_stor.getFlowers().map((x, idx) => (
+          <Col>
+            <Card className="imgCon">
+              <Card.Img variant="top" src={x.picture} className="img"/>
+              <Card.Body>
+                <Card.Title>{x.name}</Card.Title>
+                <Card.Text>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
     </Container>
+
   );
 }
 

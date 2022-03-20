@@ -26,7 +26,6 @@ const Register = () => {
 
   let onFNameChange = (e) => {
     setFName(e.target.value);
-
     if (!!err["fname"]) setErrors({["fname"]:null});
   }
 
