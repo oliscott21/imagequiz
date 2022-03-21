@@ -8,22 +8,14 @@
   }
 }
 
-.images {
+.quiz {
   padding-top: 25px;
-}
-
-.imgCon {
-  height: 45vh;
-}
-
-.imgQuiz {
-  width:30%;
-  height: 59vh;
+  padding-bottom: 25px;
 }
 
 .img {
-  width: 100%;
-  height: 60%;
+  width: 50vw;
+  height: 30vh;
 }
 
 .App-header {

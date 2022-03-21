@@ -32,6 +32,7 @@ const Quiz = () => {
   }
 
   let reset = () => {
+    setDone(undefined);
     setCur(0);
     setScore(0);
   }
@@ -41,9 +42,9 @@ const Quiz = () => {
   }
 
   return (
-    <Container className="images quiz">
+    <Container className="quiz">
           {quiz ?
-            <Card className="imgQuiz">
+            <Card className="h-100">
               <Card.Img variant="top" src={quiz.questions[cur].picture} className="img"/>
               <Card.Body>
                 <Card.Title>{score}/6</Card.Title>

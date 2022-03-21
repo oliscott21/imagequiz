@@ -13,11 +13,11 @@ const Home = () => {
   }
 
   return (
-    <Container className="images">
+    <Container className="quiz">
       <Row xs={1} md={4} className="g-4">
         {local_stor.getFlowers().map((x, idx) => (
           <Col>
-            <Card className="imgCon" onClick={() => takeQuiz(x.name)}>
+            <Card onClick={() => takeQuiz(x.name)} className="h-100">
               <Card.Img variant="top" src={x.picture} className="img"/>
               <Card.Body>
                 <Card.Title>{x.name}</Card.Title>
