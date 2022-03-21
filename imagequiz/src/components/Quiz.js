@@ -1,5 +1,5 @@
-import { Container, Row, Col, Image, Card, ListGroup, ListGroupItem, Spinner, Button } from "react-bootstrap";
-import { useLocation, useParams } from "react-router-dom";
+import { Container, Card, ListGroup, ListGroupItem, Spinner, Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import local_stor from "../data_access_layer/local.js"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
