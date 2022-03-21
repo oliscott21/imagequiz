@@ -8,6 +8,7 @@ import Register from "./components/Register";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import NavMenu from "./components/Nav";
+import Quiz from "./components/Quiz";
 import { useState } from "react";
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
             <Route path="/login" element={<Login customerLoggedIn={customerLoggedInHandler} />}>
             </Route>
             <Route path="/register" element={<Register />}>
+            </Route>
+            <Route path="/quiz/:id" element={<Quiz />}>
             </Route>
           </Routes>
 
