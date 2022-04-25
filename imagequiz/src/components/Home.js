@@ -1,38 +1,51 @@
-import { Container, Row, Col, Card } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import local_stor from "../data_access_layer/local.js"
-import { useNavigate } from "react-router-dom"
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import apiAccess from '../communication/APIAccess';
 
 const Home = () => {
+    const [flowers, setFlowers] = useState([]);
+    const navigate = useNavigate();
 
-  const navigate = useNavigate();
+    let takeTheQuiz = (flowerName) => {
+        navigate('/quiz/' + flowerName);
+    }
 
-  let takeQuiz = (flowerName) => {
-    navigate("/quiz/" + flowerName);
+    useEffect(() => {
+         apiAccess.getFlowers()
+         .then(x => setFlowers(x))
+         .catch(e => {
+             console.log(e);
+             alert('Something went wrong.')
+         })
+    }, []);
 
-  }
+    return (
+        <Container>
+            <Row xs={1} md={3} className="g-4 text-center">
+                {flowers.map((x, index) => (
+                    <Col key={index}>
+                        <Card className="h-100" onClick={() => takeTheQuiz(x.name)}>
+                            <Card.Img variant="top" src={x.picture} />
+                            <Card.Body>
+                                <Card.Title>{x.name}</Card.Title>
+                                <Card.Text>
 
-  return (
-    <Container className="quiz">
-      <Row xs={1} md={4} className="g-4">
-        {local_stor.getFlowers().map((x, idx) => (
-          <Col>
-            <Card onClick={() => takeQuiz(x.name)} className="h-100">
-              <Card.Img variant="top" src={x.picture} className="img"/>
-              <Card.Body>
-                <Card.Title>{x.name}</Card.Title>
-                <Card.Text>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
 
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+        </Container>
 
-  );
+
+    );
 }
-
 
 export default Home;

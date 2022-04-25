@@ -1,62 +1,64 @@
-import { Form, Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
-import local_stor from "../data_access_layer/local"
-import { useNavigate } from "react-router-dom"
+import { useState  } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
+import apiAccess from '../communication/APIAccess';
+
 
 
 const Login = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPass] = useState("");
-  const [err, setErrors] = useState("");
-  const nav = useNavigate();
 
-  let onEmailChange = (e) => {
-    setEmail(e.target.value);
-    if (err) setErrors(null);
-  }
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-  let onPasswordChange = (e) => {
-    setPass(e.target.value);
-    if (err) setErrors(null);
-  }
 
-  let onSubmitHandler = (e) => {
-    e.preventDefault();
 
-    let found = local_stor.customers.find(x =>
-      (x.email.toLowerCase() === email.toLowerCase()) && (x.password === password));
-
-    if (found) {
-      props.customerLoggedIn(found.fname);
-      nav("/#");
-    } else {
-      setErrors("No user with this email and password");
+    let onEmailChanged = (e) => {
+        setEmail(e.target.value);
     }
-  }
 
-  return (
-    <Form onSubmit={onSubmitHandler} className="form">
+    let onPasswordChanged = (e) => {
+        setPassword(e.target.value);
+    }
 
-    <Form.Group controlId="formBasicEmail">
-      <Form.Label>Email address</Form.Label>
-      <Form.Control type="email" placeholder="Enter email" value={email} onChange={onEmailChange}
-      isInvalid={ err }/>
-    </Form.Group>
-    <Form.Group controlId="formPassword">
-      <Form.Label>Password</Form.Label>
-      <Form.Control type="password" placeholder="Password" value={password} onChange={onPasswordChange}
-       isInvalid={ err }/>
+    let onSubmitHandler = (e) => {
+        e.preventDefault();
+        apiAccess.login(email, password)
+        .then(x => {
+            if(x.done) {
+                props.customerLoggedIn(email);
+                navigate('/');
+            } else {
+                alert('The credentials are not valid!');
+            }
+        })
+        .catch(e => {
+            console.log(e);
+            alert('Something went wrong!');
+        });
+    }
 
-       <Form.Control.Feedback type="invalid" className="error">
-         {err}
-       </Form.Control.Feedback>
-    </Form.Group>
-      <Button variant="primary" type="submit" className="btn">
-        Submit
-      </Button>
-    </Form>
-  );
+    return (
+        <Form onSubmit={onSubmitHandler}>
+
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" value={email} onChange={onEmailChanged}/>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" value={password} onChange={onPasswordChanged}/>
+            </Form.Group>
+
+            <Button variant="primary" type="submit">
+                Sign in
+            </Button>
+        </Form>
+    );
 }
 
 export default Login;
