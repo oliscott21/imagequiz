@@ -8,7 +8,6 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
-  const [err, setErrors] = useState("");
   const nav = useNavigate();
 
   let onNameChange = (e) => {
