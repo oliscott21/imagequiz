@@ -8,6 +8,10 @@ let local_stor = {
     getQuiz: (name) => {
       let quiz = data.find(x => x.name.toLowerCase() === name.toLowerCase());
       return quiz;
+    },
+
+    addCustomer: {customer} => {
+      
     }
 }
 

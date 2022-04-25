@@ -5,8 +5,7 @@ import local_stor from "../data_access_layer/local"
 import { useNavigate } from "react-router-dom"
 
 const Register = () => {
-  const [fname, setFName] = useState("");
-  const [lname, setLName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const [err, setErrors] = useState("");
@@ -16,22 +15,16 @@ const Register = () => {
 
   const err = {}
 
-    if (!fname || fname === "" ) err.fname = "Please Enter First Name";
-    if (!lname || lname === "" ) err.lname = "Please Enter Last Name";
+    if (!name || name === "" ) err.fname = "Please Enter Name";
     if (!email || email === "" ) err.email = "Please Enter Email";
     if (!password || password === "" ) err.pass = "Please Enter Password";
 
     return err;
   }
 
-  let onFNameChange = (e) => {
-    setFName(e.target.value);
-    if (!!err["fname"]) setErrors({["fname"]:null});
-  }
-
-  let onLNameChange = (e) => {
-    setLName(e.target.value);
-    if (!!err["lname"]) setErrors({["lname"]:null});
+  let onNameChange = (e) => {
+    setName(e.target.value);
+    if (!!err["name"]) setErrors({["name"]:null});
   }
 
   let onEmailChange = (e) => {
@@ -45,6 +38,9 @@ const Register = () => {
   }
 
   let onSubmitHandler = (e) => {
+    local_stor.addCustomer()
+    nav("/login");
+    /*
     e.preventDefault();
 
     const err = errors();
@@ -53,8 +49,9 @@ const Register = () => {
       setErrors(err);
     } else {
       local_stor.customers.push({fname: fname, lname: lname, email: email, password: password});
-      nav("/login");
+
     }
+    */
   }
 
     return (
@@ -62,22 +59,12 @@ const Register = () => {
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="formFirstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter first name" value={fname} onChange={onFNameChange}
-                isInvalid={ !!err.fname}/>
+              <Form.Label>Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter first name" value={name} onChange={onNameChange}
+                isInvalid={ !!err.name}/>
               <Form.Control.Feedback type="invalid" className="error">
-                {err.fname}
+                {err.name}
               </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="formLastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control placeholder="Enter Last name" value={lname} onChange={onLNameChange}
-              isInvalid={ !!err.lname}/>
-            <Form.Control.Feedback type="invalid" className="error">
-              {err.lname}
-            </Form.Control.Feedback>
             </Form.Group>
           </Col>
         </Row>
