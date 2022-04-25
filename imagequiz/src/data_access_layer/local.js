@@ -10,8 +10,8 @@ let local_stor = {
       return quiz;
     },
 
-    addCustomer: {customer} => {
-      
+    addCustomer: (name, email, password) => {
+
     }
 }
 
