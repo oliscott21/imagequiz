@@ -40,7 +40,7 @@ function App() {
             </Route>
             <Route path="/register" element={<Register />}>
             </Route>
-            <Route path="/quiz/:id" element={<Quiz />}>
+            <Route path="/quiz/:id" element={<Quiz user={user}/>}>
             </Route>
           </Routes>
 

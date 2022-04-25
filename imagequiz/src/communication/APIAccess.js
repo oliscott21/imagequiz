@@ -39,12 +39,27 @@ let apiAccess = {
     },
     getQuiz: (name) => {
         return fetch(`${backendAddress}/quiz/${name}`)
-        .then(x => x.json())
+        .then(x => x.json()
+        )
         .then(x => {
             console.log(x);
             return x.result;
         });
-    }
+    },
+    addScore: (quizTaker, quizName, score) => {
+         return fetch(`${backendAddress}/score`, {
+            method: 'Post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({quizTaker, quizName, score})
+         })
+         .then(x => x.json())
+         .then(x => {
+             console.log(x);
+             return x;
+         });
+     }
 }
 
 export default apiAccess;

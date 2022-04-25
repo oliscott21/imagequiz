@@ -43,8 +43,6 @@ const Home = () => {
             </Row>
 
         </Container>
-
-
     );
 }
 
