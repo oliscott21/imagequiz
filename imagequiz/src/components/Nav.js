@@ -16,7 +16,7 @@ const NavMenu = (props) => {
         :
           <>
             <Nav.Link href="#/register">
-              Register
+              Registe
             </Nav.Link>
             <Nav.Link href="#/login">
               Login
