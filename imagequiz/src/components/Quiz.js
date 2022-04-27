@@ -19,8 +19,9 @@ const Quiz = (props) => {
     apiAccess.getQuiz(id)
     .then(x => {
         if (x.signedIn) {
+            console.log(x.result.questions);
             if (x.result) {
-                setQuiz(x.questions);
+                setQuiz(x.result.questions);
             } else {
                 alert(x.message);
                 navigate('/');
@@ -38,19 +39,21 @@ const Quiz = (props) => {
   }, []);
 
   let answered = (pick) => {
-    if (pick === quiz[cur].answer && score < 6) {
-      setScore(score + 1);
-    }
-    if (cur >= quiz.length-1) {
-      apiAccess.addScore(props.user, id, score)
-      .then(x => console.log(x))
-      .catch(e => {
-          console.log(e);
-          alert('Something went wrong.')
-      })
-      setDone(true);
-    } else {
-      setCur(cur + 1);
+    if (!done) {
+        if (pick === quiz[cur].answer) {
+          setScore(score + 1);
+        }
+        if (cur >= quiz.length-1) {
+          apiAccess.addScore(props.user, id, score)
+          .then(x => console.log(x))
+          .catch(e => {
+              console.log(e);
+              alert('Something went wrong.')
+          })
+          setDone(true);
+        } else {
+          setCur(cur + 1);
+        }
     }
   }
 
