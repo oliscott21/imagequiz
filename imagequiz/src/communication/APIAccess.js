@@ -1,4 +1,5 @@
-let backendAddress = 'https://oliscott21-imagequiz-api.herokuapp.com';
+let backendAddress = 'https://oliscott21-imagequiz-backend.herokuapp.com';
+backendAddress = 'http://localhost:4002'
 
 let apiAccess = {
     addCustomer: (name, email, password) => {
@@ -18,8 +19,10 @@ let apiAccess = {
      login: (email, password) => {
         return fetch(`${backendAddress}/login`, {
            method: 'Post',
+           credentials: 'include',
            headers: {
-               'Content-Type': 'application/json'
+               'Content-Type': 'application/json',
+               'Access-Control-Allow-Credentials': true
            },
            body: JSON.stringify({email, password})
         })
@@ -29,28 +32,46 @@ let apiAccess = {
             return x;
         });
     },
+
     getFlowers: () => {
-        return fetch(`${backendAddress}/flowers`)
+        return fetch(`${backendAddress}/flowers`, {
+              method: 'Get',
+              credentials: 'include',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Access-Control-Allow-Credentials': true
+              }
+        })
         .then(x => x.json())
         .then(x => {
             console.log(x);
             return x.result;
         });
     },
+
     getQuiz: (name) => {
-        return fetch(`${backendAddress}/quiz/${name}`)
-        .then(x => x.json()
-        )
+        return fetch(`${backendAddress}/quiz/${name}`, {
+              method: 'Get',
+              credentials: 'include',
+              headers: {
+                  'Content-Type': 'application/json',
+                  "Access-Control-Allow-Credentials": true
+              }
+        })
+        .then(x => x.json())
         .then(x => {
             console.log(x);
-            return x.result;
+            return x;
         });
     },
+
     addScore: (quizTaker, quizName, score) => {
          return fetch(`${backendAddress}/score`, {
             method: 'Post',
+            credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Credentials': true
             },
             body: JSON.stringify({quizTaker, quizName, score})
          })

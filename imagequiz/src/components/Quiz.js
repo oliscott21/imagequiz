@@ -18,7 +18,18 @@ const Quiz = (props) => {
   useEffect(() => {
     apiAccess.getQuiz(id)
     .then(x => {
-        setQuiz(x.questions);
+        if (x.signedIn) {
+            if (x.result) {
+                setQuiz(x.questions);
+            } else {
+                alert(x.message);
+                navigate('/');
+            }
+        } else {
+          alert("Please log in first!")
+          navigate('/');
+        }
+
     })
     .catch(e => {
         console.log(e);

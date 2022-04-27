@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col, Container } from "react-bootstrap";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -11,10 +11,13 @@ import NavMenu from "./components/Nav";
 import Quiz from "./components/Quiz";
 import { useState } from "react";
 
+
 function App() {
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState(localStorage.getItem("user"));
+
   let customerLoggedInHandler = (customerEmail) => {
-    setUser(customerEmail);
+      localStorage.setItem("user", customerEmail);
+      setUser(customerEmail);
   }
 
   return (
@@ -40,7 +43,9 @@ function App() {
             </Route>
             <Route path="/register" element={<Register />}>
             </Route>
-            <Route path="/quiz/:id" element={<Quiz user={user}/>}>
+            <Route path="/quiz/:id" element={
+              <ProtectedRoute user={user}><Quiz user={user}/></ProtectedRoute>
+            }>
             </Route>
           </Routes>
 
@@ -52,12 +57,16 @@ function App() {
 
         </Container>
       </HashRouter>
-
     </div>
-
-
   );
+}
 
+const ProtectedRoute = ({ user, children }) => {
+    if (user) {
+        return children;
+    } else {
+        return <Navigate to="/login/" />;
+    }
 }
 
 export default App;
