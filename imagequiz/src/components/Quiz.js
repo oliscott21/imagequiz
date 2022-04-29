@@ -19,7 +19,6 @@ const Quiz = (props) => {
     apiAccess.getQuiz(id)
     .then(x => {
         if (x.signedIn) {
-            console.log(x.result.questions);
             if (x.result) {
                 setQuiz(x.result.questions);
             } else {
@@ -28,7 +27,7 @@ const Quiz = (props) => {
             }
         } else {
           alert("Please log in first!")
-          navigate('/');
+          navigate('/login');
         }
 
     })

@@ -27,13 +27,13 @@ const Register = () => {
     let onSubmitHandler = (e) => {
         e.preventDefault();
         apiAccess.addCustomer(name, email, password)
-        .then(x => navigate('/login'))
+        .then(x => navigate("/login"))
         .catch(e =>
             {
                 console.log(e);
                 alert('Registeration failed.');
             }
-            );
+        );
     }
 
     return (

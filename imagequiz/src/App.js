@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import NavMenu from "./components/Nav";
 import Quiz from "./components/Quiz";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 
 function App() {
@@ -18,6 +19,11 @@ function App() {
   let customerLoggedInHandler = (customerEmail) => {
       localStorage.setItem("user", customerEmail);
       setUser(customerEmail);
+  }
+
+  let customerLoggedOutHandler = () => {
+      localStorage.removeItem("user");
+      setUser(undefined);
   }
 
   return (
@@ -32,12 +38,14 @@ function App() {
           </Row>
           <Row>
             <Col>
-              <NavMenu user={user}/>
+              <NavMenu user={user} customerLoggedOut={customerLoggedOutHandler}/>
             </Col>
           </Row>
 
           <Routes>
             <Route path="/" element={<Home />}>
+            </Route>
+            <Route path="/login/:from" element={<Login customerLoggedIn={customerLoggedInHandler} />}>
             </Route>
             <Route path="/login" element={<Login customerLoggedIn={customerLoggedInHandler} />}>
             </Route>
@@ -62,10 +70,11 @@ function App() {
 }
 
 const ProtectedRoute = ({ user, children }) => {
+    const { id } = useParams();
     if (user) {
         return children;
     } else {
-        return <Navigate to="/login/" />;
+        return <Navigate to={`/login/${id}`} />;
     }
 }
 
