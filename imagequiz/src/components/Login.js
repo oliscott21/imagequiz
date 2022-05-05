@@ -30,7 +30,6 @@ const Login = (props) => {
         .then(x => {
             if(x.done) {
                 props.customerLoggedIn(email);
-                console.log(from);
                 if (from) {
                   navigate("/quiz/" + from);
                 } else {

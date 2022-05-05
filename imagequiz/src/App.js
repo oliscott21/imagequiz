@@ -4,6 +4,7 @@ import { Row, Col, Container } from "react-bootstrap";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
+import FederatedLogin from './components/FederatedLogin';
 import Register from "./components/Register";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -14,68 +15,74 @@ import { useParams } from "react-router-dom";
 
 
 function App() {
-  const [user, setUser] = useState(localStorage.getItem("user"));
+  const [customer, setCustomer] = useState(localStorage.getItem('customer'));
 
   let customerLoggedInHandler = (customerEmail) => {
-      localStorage.setItem("user", customerEmail);
-      setUser(customerEmail);
+    localStorage.setItem('customer', customerEmail);
+    setCustomer(customerEmail);
   }
 
   let customerLoggedOutHandler = () => {
-      localStorage.removeItem("user");
-      setUser(undefined);
+    localStorage.removeItem('customer');
+    setCustomer(undefined);
   }
 
   return (
-    <div className="App">
+    <HashRouter>
+      <Container fluid>
+        <Row>
+          <Col>
+            <Header />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <NavMenu customer={customer} customerLoggedOut={customerLoggedOutHandler} />
+          </Col>
+        </Row>
 
-      <HashRouter>
-        <Container fluid>
-          <Row>
-            <Col>
-              <Header />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <NavMenu user={user} customerLoggedOut={customerLoggedOutHandler}/>
-            </Col>
-          </Row>
+        <Routes>
+          <Route exact path='/register' element={<Register />}>
 
-          <Routes>
-            <Route path="/" element={<Home />}>
-            </Route>
-            <Route path="/login/:from" element={<Login customerLoggedIn={customerLoggedInHandler} />}>
-            </Route>
-            <Route path="/login" element={<Login customerLoggedIn={customerLoggedInHandler} />}>
-            </Route>
-            <Route path="/register" element={<Register />}>
-            </Route>
-            <Route path="/quiz/:id" element={
-              <ProtectedRoute user={user}><Quiz user={user}/></ProtectedRoute>
-            }>
-            </Route>
-          </Routes>
+          </Route>
+          <Route path='/login/:from' element={<Login customerLoggedIn={customerLoggedInHandler} />}>
 
-          <Row>
-            <Col>
-              <Footer />
-            </Col>
-          </Row>
+          </Route>
+          <Route path='/login' element={<Login customerLoggedIn={customerLoggedInHandler} />}>
 
-        </Container>
-      </HashRouter>
-    </div>
+          </Route>
+          <Route path='/google/:username/:name' element={<FederatedLogin provider="google" customerLoggedIn={customerLoggedInHandler} />}>
+
+          </Route>
+
+          <Route exact path='/quiz/:id' element={
+            <ProtectedRoute customer={customer}><Quiz /></ProtectedRoute>
+          } >
+
+          </Route>
+          <Route exact path='/' element={<Home />} >
+
+          </Route>
+        </Routes>
+
+        <Row>
+          <Col>
+            <Footer />
+          </Col>
+        </Row>
+      </Container>
+    </HashRouter>
   );
 }
 
-const ProtectedRoute = ({ user, children }) => {
-    const { id } = useParams();
-    if (user) {
-        return children;
-    } else {
-        return <Navigate to={`/login/${id}`} />;
-    }
+const ProtectedRoute = ({ customer, children }) => {
+  const { id } = useParams();
+
+  if (customer) {
+    return children;
+  } else {
+    return <Navigate to={`/login/${id}`} />;
+  }
 }
 
 export default App;

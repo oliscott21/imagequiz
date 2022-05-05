@@ -1,4 +1,5 @@
-let backendAddress = 'https://oliscott21-imagequiz-backend.herokuapp.com';
+import congifuration from '../configuration';
+let backendAddress = congifuration.backendAddress;
 
 let apiAccess = {
     addCustomer: (name, email, password) => {
@@ -18,10 +19,10 @@ let apiAccess = {
      login: (email, password) => {
         return fetch(`${backendAddress}/login`, {
            method: 'Post',
-           credentials: 'include',
+           credentials: "include",
            headers: {
                'Content-Type': 'application/json',
-               'Access-Control-Allow-Credentials': true
+               "Access-Control-Allow-Credentials": true
            },
            body: JSON.stringify({email, password})
         })
@@ -31,47 +32,14 @@ let apiAccess = {
             return x;
         });
     },
-
     logout: (email, password) => {
-       return fetch(`${backendAddress}/logout`, {
-          method: 'Post',
-          credentials: 'include',
-          headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Credentials': true
-          }
-       })
-       .then(x => x.json())
-       .then(x => {
-           console.log(x);
-           return x;
-       });
-   },
-
-    getFlowers: () => {
-        return fetch(`${backendAddress}/flowers`, {
-              method: 'Get',
-              credentials: 'include',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Access-Control-Allow-Credentials': true
-              }
-        })
-        .then(x => x.json())
-        .then(x => {
-            console.log(x);
-            return x.result;
-        });
-    },
-
-    getQuiz: (name) => {
-        return fetch(`${backendAddress}/quiz/${name}`, {
-              method: 'Get',
-              credentials: 'include',
-              headers: {
-                  'Content-Type': 'application/json',
-                  "Access-Control-Allow-Credentials": true
-              }
+        return fetch(`${backendAddress}/logout`, {
+           method: 'Post',
+           credentials: "include",
+           headers: {
+               'Content-Type': 'application/json',
+               "Access-Control-Allow-Credentials": true
+           }
         })
         .then(x => x.json())
         .then(x => {
@@ -79,23 +47,51 @@ let apiAccess = {
             return x;
         });
     },
-
-    addScore: (quizTaker, quizName, score) => {
-         return fetch(`${backendAddress}/score`, {
-            method: 'Post',
-            credentials: 'include',
+    getFlowers: () => {
+        return fetch(`${backendAddress}/flowers`, {
+            method: 'Get',
+            credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Credentials': true
-            },
-            body: JSON.stringify({quizTaker, quizName, score})
+                "Access-Control-Allow-Credentials": true
+            }
          })
-         .then(x => x.json())
-         .then(x => {
-             console.log(x);
-             return x;
-         });
-     }
+        .then(x => x.json())
+        .then(x => {
+            console.log(x);
+            return x.result;
+        });
+    },
+    getQuiz: (name) => {
+        return fetch(`${backendAddress}/quiz/${name}`, {
+            method: 'Get',
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Credentials": true
+            }
+         })
+        .then(x => x.json())
+        .then(x => {
+            console.log(x);
+            return x.result;
+        });
+    },
+    isLoggedIn: () => {
+        return fetch(`${backendAddress}/isloggedin`, {
+            method: 'Get',
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Credentials": true
+            }
+         })
+        .then(x => x.json())
+        .then(x => {
+            console.log(x);
+            return x.result;
+        });
+    }
 }
 
 export default apiAccess;
