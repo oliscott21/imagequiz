@@ -2,9 +2,9 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import apiAccess from '../communication/APIAccess';
-import congifuration from '../configuration';
+import congifuration from '../configurations';
 
-const Nav = (props) => {
+const NavMenu = (props) => {
   let google = `${congifuration.backendAddress}/auth/google`;
 
     let logout = () => {

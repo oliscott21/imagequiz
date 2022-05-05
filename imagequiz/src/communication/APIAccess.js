@@ -1,4 +1,4 @@
-import congifuration from '../configuration';
+import congifuration from '../configurations';
 let backendAddress = congifuration.backendAddress;
 
 let apiAccess = {
